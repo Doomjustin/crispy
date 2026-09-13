@@ -4,7 +4,9 @@
         "spdlog",
         "ms-gsl",
         "boost",
-        "catch2"
+        "catch2",
+        "liburing",
+        "jemalloc"
     ],
     "name": "crispy",
     "version": "0.0.1",
