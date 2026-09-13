@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create C++ Files (.h/.cpp/.test.cpp)",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/scripts/create_cpp_files.py",
+                "${input:cppFileName}"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "cppFileName",
+            "type": "promptString",
+            "description": "Input file name (e.g. leveldb/new_item or src/leveldb/new_item). Extension is optional.",
+            "default": "leveldb/new_item"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    // cmake工具的输出日志编码
+    "cmake.outputLogEncoding": "utf-8",
+    "editor.formatOnSave": true,
+    "clangd.path": "clangd",
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+    },
+    "cmake.debugConfig": {
+        "type": "lldb-dap",
+        "program": "${command:cmake.launchTargetPath}",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "externalConsole": false,
+        "miDebuggerPath": "/opt/llvm-22/bin/lldb-dap"
+    },
+}
