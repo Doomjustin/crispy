@@ -34,13 +34,13 @@ def _sanitize_namespace(value: str) -> str:
     namespace_name = re.sub(r"[^a-zA-Z0-9_]", "_", value)
     if namespace_name and namespace_name[0].isdigit():
         namespace_name = f"ns_{namespace_name}"
-    return namespace_name or "playground"
+    return namespace_name or "crispy"
 
 
 def _build_include_guard(name: str) -> str:
     suffix = name.removeprefix("src/")
     normalized = re.sub(r"[^a-zA-Z0-9]", "_", suffix).upper()
-    return f"PLAY_GROUND_{normalized}_H"
+    return f"CRISPY_{normalized}_H"
 
 
 def _write_file(path: Path, content: str) -> None:
@@ -76,7 +76,7 @@ def main() -> int:
     header_include = f"{name.removeprefix('src/')}.h"
 
     src_parts = Path(name).parts
-    namespace_name = "playground"
+    namespace_name = "crispy"
     if len(src_parts) > 1 and src_parts[0] == "src":
         namespace_name = _sanitize_namespace(src_parts[1])
 
