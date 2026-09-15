@@ -13,6 +13,9 @@ target_compile_definitions(crispy_redis
     PUBLIC
         BOOST_ASIO_HAS_IO_URING
         BOOST_ASIO_DISABLE_EPOLL
+    PRIVATE
+        $<$<CONFIG:Debug>:SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE>
+        $<$<CONFIG:Release,MinSizeRel,RelWithDebInfo>:SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_WARN>
 )
 
 target_include_directories(crispy_redis PUBLIC ${CRISPY_INCLUDE_DIRS})

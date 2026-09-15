@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <optional>
 #include <span>
 #include <string>
 #include <string_view>
@@ -60,9 +61,10 @@ public:
 
     void consume_all() noexcept;
 
-    auto find(std::string_view delimeter) const noexcept -> std::string_view;
+    auto find(std::string_view delimeter) const noexcept -> std::optional<std::string_view>;
 
-    auto find(std::size_t from, std::string_view delimeter) const noexcept -> std::string_view;
+    auto find(std::size_t from, std::string_view delimeter) const noexcept
+        -> std::optional<std::string_view>;
 };
 
 } // namespace crispy::redis

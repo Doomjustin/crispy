@@ -24,7 +24,8 @@ void StringBuffer::consume_all() noexcept
     write_index_ = 0;
 }
 
-auto StringBuffer::find(std::string_view delimeter) const noexcept -> std::string_view
+auto StringBuffer::find(std::string_view delimeter) const noexcept
+    -> std::optional<std::string_view>
 {
     auto pos = peek().find(delimeter);
 
@@ -35,16 +36,16 @@ auto StringBuffer::find(std::string_view delimeter) const noexcept -> std::strin
 }
 
 auto StringBuffer::find(std::size_t from, std::string_view delimeter) const noexcept
-    -> std::string_view
+    -> std::optional<std::string_view>
 {
     assert(from <= readable_size());
 
-    auto pos = peek().substr(from).find(delimeter);
+    auto n = peek().substr(from).find(delimeter);
 
-    if (pos == std::string_view::npos)
+    if (n == std::string_view::npos)
         return {};
 
-    return peek().substr(from, pos);
+    return peek().substr(from, n);
 }
 
 } // namespace crispy::redis

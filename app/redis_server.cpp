@@ -5,8 +5,11 @@
 
 int main()
 {
-    crispy::redis::Server server{ 12345 }; // Example port number
+    SPDLOG_INFO("Starting Redis server...");
+
+    crispy::redis::Server server{ 12345 };
     server.run();
 
+    SPDLOG_INFO("Redis server stopped.");
     return EXIT_SUCCESS;
 }

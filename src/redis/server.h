@@ -1,10 +1,12 @@
 #ifndef CRISPY_REDIS_SERVER_H
 #define CRISPY_REDIS_SERVER_H
 
+#include <cstdint>
 #include <vector>
 
 #include <boost/asio.hpp>
 
+#include "alias.h"
 #include "database.h"
 
 namespace crispy::redis {
@@ -12,7 +14,8 @@ namespace crispy::redis {
 class Server {
 private:
     boost::asio::io_context context_;
-    boost::asio::ip::tcp::acceptor acceptor_;
+    std::uint16_t port_;
+    Acceptor acceptor_;
 
     std::vector<Database> databases_;
 
@@ -22,11 +25,17 @@ public:
     void run();
 
 private:
-    auto accept() -> boost::asio::awaitable<void>;
+    void listen();
 
-    auto session(boost::asio::ip::tcp::socket socket) -> boost::asio::awaitable<void>;
+    auto accept() -> Awaitable<void>;
 
-    auto shutdown_monitor() -> boost::asio::awaitable<void>;
+    auto session(Socket socket) -> Awaitable<void>;
+
+    auto shutdown_monitor() -> Awaitable<void>;
+
+    auto check_ttl() -> Awaitable<void>;
+
+    static auto check_expired_ratio(Database& db, std::size_t sample_size) -> float;
 };
 
 } // namespace crispy::redis

@@ -30,11 +30,7 @@ private:
     std::unordered_map<std::string_view, std::optional<TimePoint>> expiry_;
 
 public:
-    Database()
-    {
-        data_.reserve(4096 * 4096);
-        expiry_.reserve(4096 * 4096);
-    }
+    Database();
 
     auto contains(std::string_view key) const noexcept -> bool;
 

@@ -80,20 +80,22 @@ def main() -> int:
     if len(src_parts) > 1 and src_parts[0] == "src":
         namespace_name = _sanitize_namespace(src_parts[1])
 
+    full_namespace_name = f"crispy::{namespace_name}"
+
     include_guard = _build_include_guard(name)
 
     header_content = (
         f"#ifndef {include_guard}\n"
         f"#define {include_guard}\n\n"
-        f"namespace {namespace_name} {{\n\n"
-        f"}} // namespace {namespace_name}\n\n"
+        f"namespace {full_namespace_name} {{\n\n"
+        f"}} // namespace {full_namespace_name}\n\n"
         f"#endif // {include_guard}\n"
     )
 
     source_content = (
         f"#include \"{header_include}\"\n\n"
-        f"namespace {namespace_name} {{\n\n"
-        f"}} // namespace {namespace_name}\n"
+        f"namespace {full_namespace_name} {{\n\n"
+        f"}} // namespace {full_namespace_name}\n"
     )
 
     test_content = (

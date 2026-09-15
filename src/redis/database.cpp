@@ -4,6 +4,13 @@
 
 namespace crispy::redis {
 
+Database::Database()
+{
+    keys_.reserve(4096);
+    data_.reserve(4096);
+    expiry_.reserve(4096);
+}
+
 auto Database::contains(std::string_view key) const noexcept -> bool
 {
     if (is_expired(key))
